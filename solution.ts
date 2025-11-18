@@ -7,7 +7,10 @@ function formatValue(value: string | number | boolean): string | number | boolea
   } else if (typeof value === 'boolean') {
     return !value;
   }
-  return 0;
+  else{
+    return 0;
+  }
+  
 }
 
 
@@ -21,7 +24,10 @@ function getLength(value:string|number[]):string|number{
     else if(Array.isArray(value)){
         return value.length;
     }
-    return 0;
+    else{
+       return 0;
+    }
+  
 
    
 }
@@ -131,19 +137,20 @@ function getUniqueValues(arr1: (string | number)[],arr2: (string | number)[]): (
 }
 
 function calculateTotalPrice(products: Product[]): number {
-  if (products.length<1){
-        return 0;
-  }
+  if (products.length < 1) {
+    return 0;
+  } else {
+    return products.reduce((total, product) => {
+      const priceWithoutDiscount = product.price * product.quantity;
+      const discountedPrice = product.discount
+        ? priceWithoutDiscount * (1 - product.discount / 100)
+        : priceWithoutDiscount;
 
-  else{
-     products.reduce((total, product) => {
-    const priceWithoutDiscount = product.price * product.quantity;
-    return total + (priceWithoutDiscount);
-  }, 0);  
+      return total + discountedPrice;
+    }, 0);
   }
-  return 0;
- 
 }
+
 
 
 const products = [
@@ -151,4 +158,3 @@ const products = [
   { name: 'Notebook', price: 25, quantity: 3, discount: 10 },
   { name: 'Bag', price: 50, quantity: 1, discount: 20 },
 ];
- 
